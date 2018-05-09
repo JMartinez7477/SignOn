@@ -51,5 +51,4 @@ public class Meeting {
                (TimeAndDay.timeFromMilli(startTime) + " - " +
                 TimeAndDay.timeFromMilli(endTime));
     }
-    
 }

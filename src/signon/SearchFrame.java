@@ -33,11 +33,12 @@ public class SearchFrame extends JFrame {
     private boolean cancelled;
 
     public SearchFrame(ArrayList<Member> members) {
-        super();
+        super("VorTX 3735");
         setUp(members);
     }
 
     public void setUp(ArrayList<Member> members) {
+        setIconImage(VorTX.logo.getImage());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1370, 760);
         searchPanel = new SearchPanel(members);

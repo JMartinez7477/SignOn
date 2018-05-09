@@ -8,7 +8,6 @@ package signon;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
-//import javafx.scene.paint.Color;
 import javax.swing.AbstractAction;
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -31,13 +30,13 @@ public class PersonFrame extends JFrame {
     Member member;
 
     public PersonFrame(Member member) {
-        super();
+        super("VorTX 3735");
         this.member = member;
         setUp();
     }
 
     public void setUp() {
-
+        setIconImage(VorTX.logo.getImage());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1370, 760);
         Box b = Box.createVerticalBox();

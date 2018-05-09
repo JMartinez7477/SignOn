@@ -42,7 +42,7 @@ public class TimeAndDay {
 
         JLabel label2 = new JLabel(getDay());
         label2.setBackground(VorTX.blue);
-        label2.setFont(VorTX.f124);
+        label2.setFont(VorTX.f96);
         label2.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         label2.setForeground(VorTX.green);
 
@@ -111,15 +111,17 @@ public class TimeAndDay {
         int hour = Integer.parseInt(split[0], 10);
         String good;
         
-        if (hour < 12) {
+        if (hour < 9) {
             good = split[0].substring(1) + ":" + split[1] + "AM";
         } else if (hour == 24 || hour == 0) {
             good = "12:" + split[1] + "AM";
         } else if (hour == 12) {
             good = "12:" + split[1] + "PM";
-        } else {
+        } else if(hour > 12){
             int normHour = hour - 12;
             good = normHour + ":" + split[1] + "PM";
+        } else{
+            good = split[0] + ":" + split[1] + "AM";
         }
         return good;
     }

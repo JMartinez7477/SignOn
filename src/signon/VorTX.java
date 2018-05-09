@@ -34,9 +34,6 @@ public class VorTX {
         // TODO code application logic here
         fileHandler = new FileHandler("info.txt");
         students = fileHandler.load().getTeam();
-//        students = new ArrayList<Student>();
-//        students.add(new Student("531749", "Joshua Martinez"));
-//        students.add(new Student("531745", "Joseph Martinez"));
         setUpScreen();
     }
     static FileHandler fileHandler;
@@ -65,7 +62,7 @@ public class VorTX {
     static IDEnter enter;
 
     public static void setUpScreen() {
-        logo = new ImageIcon("logo.jpg");
+        logo = new ImageIcon("logo.png");
         setUpFonts();
         home = new JFrame("VorTX 3735");
         home.setIconImage(logo.getImage());

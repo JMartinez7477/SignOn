@@ -32,12 +32,13 @@ public class OutputFrame extends JFrame {
     private boolean exited;
 
     public OutputFrame(ArrayList<Member> members) {
-        super();
+        super("VorTX 3735");
         this.members = members;
         setUp();
     }
 
     public void setUp() {
+        setIconImage(VorTX.logo.getImage());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1370, 760);
         Box b = Box.createVerticalBox();

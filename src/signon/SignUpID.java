@@ -5,12 +5,9 @@
  */
 package signon;
 
-import signon.Team;
 import java.awt.BorderLayout;
 import java.awt.Font;
-import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -55,7 +52,8 @@ public class SignUpID {
     }
     
     public void setUpScreen(){
-        frame = new JFrame();
+        frame = new JFrame("VorTX 3735");
+        frame.setIconImage(VorTX.logo.getImage());
         frame.setSize(1280, 760);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setIconImage(VorTX.logo.getImage());
@@ -268,8 +266,5 @@ public class SignUpID {
 
     public String getId() {
         return id;
-    }
-    
-    
+    }   
 }
-
