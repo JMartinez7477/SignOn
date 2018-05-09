@@ -29,7 +29,7 @@ public class Meeting {
     public long millisWorked(){
         return endTime - startTime;
     }
-    
+
     public long getStartTime() {
         return startTime;
     }
@@ -45,5 +45,11 @@ public class Meeting {
     public String toPrintInfo(){
         return startTime + " " + endTime;
      }
+    
+    public String toNiceString(){
+        return String.format("%-35s", TimeAndDay.dayFromMilli(startTime) + ": ") + 
+               (TimeAndDay.timeFromMilli(startTime) + " - " +
+                TimeAndDay.timeFromMilli(endTime));
+    }
     
 }

@@ -45,17 +45,22 @@ public class VorTX {
     static private JFrame home;
 
     static ImageIcon logo;
-    static Color blue = new Color(0, 52, 76);
-    static Color green = new Color(124, 189, 71);
-    static Font f48;
-    static Font f64;
-    static Font f96;
-    static Font f124;
+    public static Color blue = new Color(0, 52, 76);
+    public static Color green = new Color(124, 189, 71);
+    public static Font f40;
+    public static Font f48;
+    public static Font f64;
+    public static Font f96;
+    public static Font f124;
     static Timer timer;
     static SignUpID sign;
+    static SearchFrame searchFrame;
+    static OutputFrame outputFrame;
     static Timer signUpCheck;
     static Timer idEnterCheck;
     static Timer saveTimer;
+    static Timer searchedTimer;
+    static Timer ouputExitedTimer;
     static TimeAndDay time;
     static IDEnter enter;
 
@@ -65,7 +70,7 @@ public class VorTX {
         home = new JFrame("VorTX 3735");
         home.setIconImage(logo.getImage());
         home.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        home.setSize(1370, 800);
+        home.setSize(1370, 760);
         time = new TimeAndDay();
         home.add(time.getInfo(), BorderLayout.NORTH);
 
@@ -90,7 +95,7 @@ public class VorTX {
         home = new JFrame("VorTX 3735");
         home.setIconImage(logo.getImage());
         home.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        home.setSize(1370, 800);
+        home.setSize(1370, 760);
         home.add(time.getInfo(), BorderLayout.NORTH);
 
         Box b = Box.createVerticalBox();
@@ -106,13 +111,14 @@ public class VorTX {
         home.setBackground(blue);
         home.setVisible(true);
     }
-    
-    public static void setUpFonts(){
-    String[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
-    f64 = new Font(fonts[200], Font.BOLD, 64);
-    f48 = new Font(fonts[200], Font.BOLD, 48);
-    f96 = new Font(fonts[200], Font.BOLD, 96);
-    f124 = new Font(fonts[200], Font.BOLD, 124);
+
+    public static void setUpFonts() {
+        String[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
+        f40 = new Font(fonts[200], Font.BOLD, 40);
+        f64 = new Font(fonts[200], Font.BOLD, 64);
+        f48 = new Font(fonts[200], Font.BOLD, 48);
+        f96 = new Font(fonts[200], Font.BOLD, 96);
+        f124 = new Font(fonts[200], Font.BOLD, 124);
     }
 
     public static JPanel signUpPanel() {
@@ -123,8 +129,17 @@ public class VorTX {
             }
         });
         button.setFont(f48);
+        
+        JButton button2 = new JButton(new AbstractAction("Reports") {
+            public void actionPerformed(ActionEvent e) {
+                doReport();
+            }
+        });
+        button2.setFont(f48);
+        
         panel.add(button);
-        panel.setBackground(blue);
+        panel.add(button2);
+        panel.setBackground(VorTX.blue);
 
         return panel;
     }
@@ -225,7 +240,7 @@ public class VorTX {
             sign.frame.setVisible(false);
             signUpCheck.stop();
             sign.frame.dispose();
-            
+
             doNewFrame();
             timer.start();
             idEnterCheck.start();
@@ -234,7 +249,7 @@ public class VorTX {
 
             String id = sign.getId();
             String name = sign.getName();
-            
+
             sign.signedUp.setVisible(false);
             signUpCheck.stop();
             sign.signedUp.dispose();
@@ -243,9 +258,69 @@ public class VorTX {
             students.add(new Member(id, name));
             students.get(students.size() - 1).newMeeting();
 
-            doNewFrame();
-            timer.start();
-            idEnterCheck.start();
+            continueHomeScreen();
+        }
+    }
+
+    public static void continueHomeScreen() {
+        doNewFrame();
+        timer.start();
+        idEnterCheck.start();
+    }
+
+    public static void doReport() {
+        searchFrame = new SearchFrame(students);
+        home.setVisible(false);
+        timer.stop();
+        idEnterCheck.stop();
+
+        int delay = 100;
+        ActionListener update = new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                checkSearched();
+                checkSearchCancelled();
+            }
+        };
+        searchedTimer = new Timer(delay, update);
+        searchedTimer.start();
+    }
+
+    public static void checkSearched() {
+        if (searchFrame.isSearched()) {
+            searchedTimer.stop();
+            searchFrame.setVisible(false);
+            outputFrame = new OutputFrame(searchFrame.searchPanel.goodMembers);
+            startExitedTimer();
+        }
+    }
+
+    public static void checkSearchCancelled() {
+        if (searchFrame.isCancelled()) {
+            searchedTimer.stop();
+            searchFrame.setVisible(false); 
+            searchFrame.dispose();
+            continueHomeScreen();
+        }
+    }
+    
+    public static void startExitedTimer(){
+        int delay = 100;
+        ActionListener update = new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                checkExited();
+            }
+        };
+        ouputExitedTimer = new Timer(delay, update);
+        ouputExitedTimer.start();
+    }
+    
+    public static void checkExited(){
+        if(outputFrame.hasExited()){
+            ouputExitedTimer.stop();
+            outputFrame.setVisible(false);
+            outputFrame.dispose();
+            searchFrame.dispose();
+            continueHomeScreen();
         }
     }
 

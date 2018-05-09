@@ -66,12 +66,12 @@ public class Member {
 
     public void newMeeting() {
         currentMeeting = new Meeting();
-        System.out.println(name + " signed in at " +TimeAndDay.timeString);
+        System.out.println(name + " signed in at " +TimeAndDay.getTime());
     }
 
     public void endMeeting() {
         currentMeeting.setEndTime(System.currentTimeMillis());
-        System.out.println(name + " sign out at " + TimeAndDay.timeString);
+        System.out.println(name + " sign out at " + TimeAndDay.getTime());
         meetings.add(currentMeeting);
     }
 
@@ -84,7 +84,21 @@ public class Member {
         long hours = TimeUnit.MILLISECONDS.toHours(totalTime);
         long minutes = TimeUnit.MILLISECONDS.toMinutes(totalTime);
         return hours + ":" + minutes;
+    }
+    
+    public double getTotalTimeDouble(){
+        long totalTime = 0;
+        for(Meeting meeting : meetings) {
+            totalTime += meeting.millisWorked();
+        }
 
+        long hours = TimeUnit.MILLISECONDS.toHours(totalTime);
+        long minutes = TimeUnit.MILLISECONDS.toMinutes(totalTime);
+        return (hours + (minutes/60));
+    }
+    
+    public int getNumberOfMeetings(){
+        return meetings.size();
     }
     
     public String toString(){

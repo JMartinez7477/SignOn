@@ -55,13 +55,13 @@ public class TimeAndDay {
         info = panel;
     }
 
-    public String getTime() {
+    public static String getTime() {
         String good = timeFromMilli(System.currentTimeMillis());
         timeString = good;
         return good;
     }
 
-    public String getDay() {
+    public static String getDay() {
         String good = dayFromMilli(System.currentTimeMillis());
         dayString = good;
         return good;
@@ -113,7 +113,7 @@ public class TimeAndDay {
         
         if (hour < 12) {
             good = split[0].substring(1) + ":" + split[1] + "AM";
-        } else if (hour == 24) {
+        } else if (hour == 24 || hour == 0) {
             good = "12:" + split[1] + "AM";
         } else if (hour == 12) {
             good = "12:" + split[1] + "PM";
