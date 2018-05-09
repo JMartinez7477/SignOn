@@ -56,7 +56,6 @@ public class Team {
                 greatest = memId;
             }
         }
-        System.out.println(greatest);
         return greatest;
     }
     

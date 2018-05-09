@@ -104,7 +104,7 @@ public class TimeAndDay {
     }
     
     public static String timeFromMilli(long milliseconds){
-        java.sql.Time time = new java.sql.Time(System.currentTimeMillis());
+        java.sql.Time time = new java.sql.Time(milliseconds);
         String timeStr = time.toString();
         String[] split = timeStr.split(":");
 

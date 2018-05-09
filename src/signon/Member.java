@@ -101,6 +101,10 @@ public class Member {
         return meetings.size();
     }
     
+    public boolean hasCurrentMeeting(){
+        return currentMeeting != null;
+    }
+    
     public String toString(){
         return id + ": "+name;
     }

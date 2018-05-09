@@ -93,9 +93,7 @@ public class IDEnter {
                 index = i;
                 break;
             }
-
         }
-
         return index;
     }
 
@@ -118,7 +116,12 @@ public class IDEnter {
             if (idExists(idEntered) == -1) {
                 report.append("Please add new user to use that ID.");
                 good = false;
-            } else {
+            } else if(!students.get(idExists(idEntered)).hasCurrentMeeting() 
+                    && set && !inOrOut){
+                report.setText(students.get(idExists(idEntered)).getName() + " never signed in.");
+                good = false;
+            }
+            else {
                 report.append("Good");
                 good = true;
             }

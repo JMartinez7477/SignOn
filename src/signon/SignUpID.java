@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -211,8 +212,10 @@ public class SignUpID {
     }
     
     public JFrame signedUpFrame(String name, String id){
-        JFrame signedUp = new JFrame();
+        JFrame signedUp = new JFrame("VorTX 3735");
         signedUp.setIconImage(VorTX.logo.getImage());
+        signedUp.setSize(1280, 760);
+        
         JPanel panel = new JPanel();
         Box b = Box.createVerticalBox();
         
@@ -244,8 +247,10 @@ public class SignUpID {
         panel.add(b);
         panel.setBackground(VorTX.blue);
         signedUp.add(panel,BorderLayout.NORTH);
-        signedUp.setBackground(VorTX.blue);
-        signedUp.setSize(1280, 760);
+        
+        JTextArea area = new JTextArea("");
+        area.setBackground(VorTX.blue);
+        signedUp.add(area);
         signedUp.setBackground(VorTX.blue);
         signedUp.setVisible(true);
         
