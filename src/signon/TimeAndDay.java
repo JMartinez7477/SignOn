@@ -5,32 +5,31 @@
  */
 package signon;
 
-import java.awt.Font;
-import java.awt.GraphicsEnvironment;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.Timer;
-
 
 /**
  *
  * @author Joshua
  */
 public class TimeAndDay {
+
     private JPanel info;
     static String timeString;
     static String dayString;
-    
-    public TimeAndDay(){
+
+    public TimeAndDay() {
         updateInfo();
     }
 
     public JPanel getInfo() {
         return info;
     }
-    
+
     public void updateInfo() {
         JPanel panel = new JPanel();
 
@@ -66,8 +65,8 @@ public class TimeAndDay {
         dayString = good;
         return good;
     }
-    
-    public static String dayFromMilli(long milliseconds){
+
+    public static String dayFromMilli(long milliseconds) {
         Date day = new Date(milliseconds);
         String dayStr = day.toString();
         String[] parts = dayStr.split(" ");
@@ -102,25 +101,34 @@ public class TimeAndDay {
         String good = dayOfWeek + " " + parts[1] + " " + parts[2] + ", " + parts[5];
         return good;
     }
-    
-    public static String timeFromMilli(long milliseconds){
+
+    public static String getDateForFile() {
+        GregorianCalendar cal = new GregorianCalendar();
+        cal.setTimeInMillis(System.currentTimeMillis());
+
+        return((cal.get(GregorianCalendar.MONTH) + 1) + "_"
+                + cal.get(GregorianCalendar.DATE) + "_"
+                + (cal.get(GregorianCalendar.YEAR) + "").substring(2));
+    }
+
+    public static String timeFromMilli(long milliseconds) {
         java.sql.Time time = new java.sql.Time(milliseconds);
         String timeStr = time.toString();
         String[] split = timeStr.split(":");
 
         int hour = Integer.parseInt(split[0], 10);
         String good;
-        
+
         if (hour < 9) {
             good = split[0].substring(1) + ":" + split[1] + "AM";
         } else if (hour == 24 || hour == 0) {
             good = "12:" + split[1] + "AM";
         } else if (hour == 12) {
             good = "12:" + split[1] + "PM";
-        } else if(hour > 12){
+        } else if (hour > 12) {
             int normHour = hour - 12;
             good = normHour + ":" + split[1] + "PM";
-        } else{
+        } else {
             good = split[0] + ":" + split[1] + "AM";
         }
         return good;

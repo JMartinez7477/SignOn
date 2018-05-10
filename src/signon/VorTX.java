@@ -32,6 +32,7 @@ public class VorTX {
      */
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
+        //System.out.println(TimeAndDay.getDateForFile());
         fileHandler = new FileHandler("info.txt");
         students = fileHandler.load().getTeam();
         setUpScreen();
@@ -254,6 +255,7 @@ public class VorTX {
 
             students.add(new Member(id, name));
             students.get(students.size() - 1).newMeeting();
+            fileHandler.logNewMember(name, id);
 
             continueHomeScreen();
         }
@@ -344,6 +346,7 @@ public class VorTX {
             } else {
                 students.get(index).endMeeting();
             }
+            fileHandler.logMeeting(students.get(index).getName(), inOrOut);
             try {
                 Thread.sleep(3000);
             } catch (Exception e) {

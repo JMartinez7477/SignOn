@@ -19,9 +19,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.text.Document;
-import signon.Condition;
-import signon.Member;
-import signon.VorTX;
 
 /**
  *
