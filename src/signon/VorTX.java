@@ -158,7 +158,7 @@ public class VorTX {
     public static void exit() {
         JFrame exit = new JFrame("VorTX 3735");
         exit.setIconImage(logo.getImage());
-        exit.setSize(1370, 730);
+        exit.setSize(1370, 760);
         exit.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel p = new JPanel();

@@ -55,7 +55,7 @@ public class SignUpID {
     public void setUpScreen(){
         frame = new JFrame("VorTX 3735");
         frame.setIconImage(VorTX.logo.getImage());
-        frame.setSize(1280, 760);
+        frame.setSize(1370, 760);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setIconImage(VorTX.logo.getImage());
         setUpAddPanel();
@@ -214,7 +214,7 @@ public class SignUpID {
     public JFrame signedUpFrame(String name, String id){
         JFrame signedUp = new JFrame("VorTX 3735");
         signedUp.setIconImage(VorTX.logo.getImage());
-        signedUp.setSize(1280, 760);
+        signedUp.setSize(1370, 760);
         
         JPanel panel = new JPanel();
         Box b = Box.createVerticalBox();
